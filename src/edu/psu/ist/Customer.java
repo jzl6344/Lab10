@@ -1,3 +1,12 @@
+/*
+Project: Lab 8 Pizza Shop Ordering Syetem
+Purpose Details: A text based pizza shop order handling system: show a menu, handle an order with menu items, and accept the transaction payment
+Course: IST 242
+Author: Joe Oakes
+Date Developed: 5/12/2020
+Last Date Changed:
+Revision: 1
+*/
 package edu.psu.ist;
 
 import java.util.ArrayList;
@@ -15,14 +24,29 @@ public class Customer {
     }
 
         //Setters and Getters
-    public int getCustomerId() { return customerId; }
-    public void setCustomerId(int _customerId) {this.customerId = _customerId;}
+    public int getCustomerId() {
+        return customerId;
+    }
 
-    public String getCustomerName() { return customerName; }
-    public void setCustomerName(String _customerName) {this.customerName = _customerName;}
+    public void setCustomerId(int _customerId) {
+        this.customerId = _customerId;
+    }
 
-    public String getCustomerPhoneNumber() { return customerPhoneNumber; }
-    public void setCustomerPhoneNumber(String _customerPhoneNumber) {this.customerPhoneNumber = _customerPhoneNumber;}
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String _customerName) {
+        this.customerName = _customerName;
+    }
+
+    public String getCustomerPhoneNumber() {
+        return customerPhoneNumber;
+    }
+
+    public void setCustomerPhoneNumber(String _customerPhoneNumber) {
+        this.customerPhoneNumber = _customerPhoneNumber;
+    }
 
     public static void printCustomer(ArrayList<Customer> cList){
         for (Customer cust: cList){
