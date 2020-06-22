@@ -1,23 +1,24 @@
-package edu.psu.ist;
 /*
-Project: Lab 9
-Purpose Details: Pizza ordering application
+Project: Lab 8 Pizza Shop Ordering Syetem
+Purpose Details: A text based pizza shop order handling system: show a menu, handle an order with menu items, and accept the transaction payment
 Course: IST 242
 Author: Joe Oakes
-Date Developed: 3/14/19
-Last Date Changed: 3/13/19
-Rev: 2
- */
+Date Developed: 5/12/2020
+Last Date Changed:
+Revision: 1
+*/
+package edu.psu.ist;
 
-import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Main {
-    int cCount = 1;
+    private int cCount =1;
+    private static Scanner scnr =  new Scanner(System.in);
+
     public static void main(String[] args) {
 
         Main main = new Main();
-
         final char EXIT_CODE = 'E';
         final char CUST_CODE = 'C';
         final char MENU_CODE = 'M';
@@ -31,45 +32,61 @@ public class Main {
         ArrayList<Menu> mList = new ArrayList<>();
         ArrayList<Order> oList = new ArrayList<>();
         ArrayList<Transaction> tList = new ArrayList<>();
-
         Order order1 = new Order(1);
         Transaction trans1 = new Transaction(1, order1, PaymentType.cash);
-
         Menu menu1 = new Menu(1, "Plain");
         Menu menu2 = new Menu(2, "Meat");
         Menu menu3 = new Menu(3, "Extra");
         Menu menu4 = new Menu(4, "Veg");
-
         mList.add(menu1);
         mList.add(menu2);
         mList.add(menu3);
         mList.add(menu4);
-
         oList.add(order1);
         tList.add(trans1);
-
         userAction = getAction(PROMPT_ACTION);
-
         while (userAction != EXIT_CODE) {
-            switch(userAction) {
-                case CUST_CODE : cList.add(main.addCustomer());
+            switch (userAction) {
+                case CUST_CODE:
+                    cList.add(main.addCustomer());
                     break;
-                case CUST_PRNT : Customer.printCustomer(cList);
+                case CUST_PRNT:
+                    Customer.printCustomer(cList);
                     break;
-                case MENU_CODE : Menu.listMenu(mList);
+                case MENU_CODE:
+                    Menu.listMenu(mList);
                     break;
-                case ORDE_CODE : //Order.addOrders();
+                case ORDE_CODE:
+                    System.out.print("Enter customer ID : " );
+                    int cid = scnr.nextInt();
+                    ArrayList<Menu> cMenu = selectMenu(mList);
+                    Order.addOrders(order1, cList.get(cid), cMenu);
                     break;
-                case TRAN_CODE : Transaction.listTransactions(tList);
+                case TRAN_CODE:
+                    Transaction.listTransactions(tList);
                     break;
             }
-
             userAction = getAction(PROMPT_ACTION);
         }
     }
 
+    public static ArrayList<Menu> selectMenu(ArrayList<Menu> menus){
+        System.out.println("Select menu (by ID): (Press 0 to finalize)");
+        for (Menu menu : menus)
+            System.out.println("'" + menu.getmenuId() + "' for " + menu.getmenuItem());
+        int flag;
+        ArrayList<Menu> menus1 = new ArrayList<>();
+        while(true) {
+            flag = scnr.nextInt();
+            if(flag == 0)
+                break;
+            menus1.add(menus.get(flag-1));
+        }
+        return menus1;
+    }
+
     public static char getAction(String prompt) {
-        Scanner scnr = new Scanner(System.in);
+        //removed scanner object from here
         String answer = "";
         System.out.println(prompt);
         answer = scnr.nextLine().toUpperCase() + " ";
@@ -77,9 +94,9 @@ public class Main {
         return firstChar;
     }
 
-    public Customer addCustomer(){
+    public Customer addCustomer() {
         Customer cust = new Customer(cCount++);
-        Scanner scnr = new Scanner(System.in);
+        //removed scanner object from here
         System.out.println("Please Enter your Name: ");
         cust.setCustomerName(scnr.nextLine());
         System.out.println("Please Enter your Phone: ");
