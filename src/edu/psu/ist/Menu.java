@@ -1,3 +1,12 @@
+/*
+Project: Lab 8 Pizza Shop Ordering Syetem
+Purpose Details: A text based pizza shop order handling system: show a menu, handle an order with menu items, and accept the transaction payment
+Course: IST 242
+Author: Joe Oakes
+Date Developed: 5/12/2020
+Last Date Changed:
+Revision: 1
+*/
 package edu.psu.ist;
 
 import java.util.ArrayList;
@@ -23,7 +32,7 @@ public class Menu {
 
     public static void listMenu(ArrayList<Menu> mList){
         for (Menu menu: mList){
-            System.out.println(menu.getmenuItem());
+            System.out.println(menu.getmenuId() + "\t" + menu.getmenuItem());
         }
     }
 }
